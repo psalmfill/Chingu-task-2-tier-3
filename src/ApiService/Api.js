@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default() => {
     return axios.create({
-        baseURL: `https://images-api.nasa.gov`,
+        baseURL: `https://api.nasa.gov/mars-photos`,
         withCredentials: false,
         headers: {
             'Accept': 'application/json',

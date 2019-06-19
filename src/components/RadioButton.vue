@@ -17,24 +17,14 @@ export default {
                 return this.value
             },
             set: function() {
-                console.log('change r')
-                // Communicate the change to parent component so that selectedValue can be updated
-                this.$emit("change", this.label)
+                 this.$emit("change", this.label)
             }
         }
     }
 }
 </script>
 <style scoped>
-/* 
- .button-radio , .button-radio input {
-    display:block;
-    position:absolute;
-    top:10px;
-    left:0;
-    right:0;
-    bottom:0;
-} */
+
 .button-radio {
     color: #666;
 }

@@ -3,30 +3,38 @@
     <div class="row">
       <div class="col-md-6">
         <h4 class="text-left text-primary">Nasa Image Search</h4>
-        <form  @submit.stop.prevent="getImages">
+        <form  @submit.stop.prevent="nextUrl">
           <input
             type="search"
             v-on:keydown.enter="getImages"
             class="form-control input-block"
             v-model="searchVaraible"
           >
+           <div class="row">
+        <div class="col-md-12">
+            <div class="input-group options">
+                <div class="input-group-append" v-for="option in options" :key="option">
+                <RadioButton name="options" :value="camera" :label="option" @change="changeValue"/>
+                </div>
+            </div>
+        </div>
+      </div>
           <hr>
         </form>
         
       </div>
     </div>
     <div class="container" v-if="!loading">
-        <div class="row" v-if="SearchResults.collection">
-        <div class="col-md-3" v-for="(item,index) in SearchResults.collection.items" :key="index">
+        <div class="row" v-if="SearchResults.photos">
+        <div class="col-md-3" v-for="(photo,index) in SearchResults.photos" :key="index">
           <!-- <img class="img-fluid" :src="item.links[0].href" alt=""> -->
 
         <ImageCard 
-              :imageSrc="item.links[0].href"
-              :description="item.data[0].description"
-              :keyword="item.data[0].keywords==undefined?'':item.data[0].keywords[0]" />
+              :item="photo"
+              @showDetail="showModal" />
         </div>
       </div>
-      <div class="row" v-if="SearchResults.collection">
+      <!-- <div class="row" v-if="SearchResults.photos">
           <div class="col-md-4">
               <div class="row">
                   <div class="col-md-6"><button class="btn btn-primary btn-block" @click="prev">Previous</button></div>
@@ -38,19 +46,22 @@
         <div class="col-md-12">
             <h2>No result was found matching your search : {{searchVaraible}}</h2>
         </div>
-    </div>
+    </div> -->
     </div>
     <div class="row " v-else>
       <div class="col-md-12">
         <h3 class="text-center">Loading..</h3>
       </div>
     </div>
-   
+    
+   <ImageDetailModal :item='item' />
   </div>
 </template>
 <script>
 import ImageService from "@/ApiService/ImageService";
 import ImageCard from "@/components/ImageCard"
+import ImageDetailModal from '@/components/ImageDetailModal'
+import RadioButton from '@/components/RadioButton'
 
 export default {
   name: "SearchResult",
@@ -59,7 +70,11 @@ export default {
       searchVaraible:this.$route.query.q , //this.searchString != undefined ? this.searchString : "",
       SearchResults: [],
       page:this.$route.query.page =="" ?1:this.$route.query.page,
-      loading:true
+      loading:true,
+      camera : this.$route.query.camara,
+      item:{ },
+      options: ['FHAZ','RHAZ','MAST','CHEMCAM','MAHLI','NAVCAM','MARDI'
+      ,'PANCAM','MINITES'],
       
     };
   },
@@ -84,13 +99,12 @@ export default {
     //       return this.$route.query.q 
     //   }
     page(){
-      console.log(this.$route.query.page )
       return this.$route.query.page  //!='' || this.$route.query.page !=undefined) ?this.$route.query.page:1 
     }
   },
   created(){
     this.getImages()
-  
+
   },
   computed:{
     
@@ -98,9 +112,9 @@ export default {
   methods: {
     async getImages() {
         
-      const response = await ImageService.getImages({ q: this.searchVaraible,page:this.page });
-      console.log(response);
+      const response = await ImageService.getImages({ sol: this.searchVaraible,page:this.page,camara:this.camera.toLowerCase() });
       this.SearchResults = response.data;
+      console.log(response)
       this.loading = false
       // this.$forceUpdate()
     },
@@ -117,12 +131,21 @@ export default {
         this.nextUrl()
     },
     nextUrl(){
-        this.$router.push("/search?q="+this.searchVaraible+'&page='+this.page);this.$router.go()
-    }
+        this.$router.push("/search?q="+this.searchVaraible+'&page='+this.page+'&camara='+this.camera.toLowerCase());this.$router.go()
+    },
+    showModal(value){
+      this.item = value
+    },
+    changeValue: function(newValue) {
+      console.log(newValue);
+      this.camera = newValue;
+    },
 
   },
   components:{
-      ImageCard
+      ImageCard,
+      ImageDetailModal,
+      RadioButton
   }
 };
 </script>
