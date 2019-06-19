@@ -1,9 +1,9 @@
 <template>
   <div id="search">
       <h1 class="heading">Nasa Image Search</h1>
-    <form action>
+    <form action="" @submit.stop.prevent="submit">
       <div class="input-group"  >
-        <input type="search" class="form-control" v-model="searchInput" id="search-box">
+        <input type="search" class="form-control" v-model="searchInput" id="search-box" >
         <div class="input-group-add-on" id="icon">
           <icon icon="search"/>
         </div>
@@ -19,7 +19,7 @@
       </div>
       <div class="row">
           <div class="col-md-4 offset-md-4">
-              <button class="btn btn-primary btn-block" @click="doSearch">Search</button>
+              <button type="submit" class="btn btn-primary btn-block" @click="doSearch">Search</button>
           </div>
       </div>
     </form>
@@ -47,8 +47,9 @@ export default {
       this.selectedValue = newValue;
     },
     doSearch:function(){
-        alert(this.searchInput);
-    }
+         //if you want to send any data into server before redirection then you can do it here
+        this.$router.push("/search?q="+this.searchInput);
+      }
   }
 };
 </script>

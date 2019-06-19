@@ -30,5 +30,9 @@ export default {
     .card {
         margin-bottom:20px;
         cursor: pointer;
+        border:0px !important
+    }
+    .card:hover {
+        top: -10px
     }
 </style>

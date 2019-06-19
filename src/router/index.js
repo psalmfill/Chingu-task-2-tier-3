@@ -5,6 +5,7 @@ import SearchResult from '@/components/SearchResult'
 
 Vue.use(Router);
 export default new Router({
+    mode:'history',
     routes:[
         {
             path:'/',
@@ -12,7 +13,7 @@ export default new Router({
             name: 'Search'
         },
         {
-            path:'/results',
+            path:'/search',
             component : SearchResult,
             name: 'SearchResult'
         }
