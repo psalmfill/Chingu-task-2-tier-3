@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "postinstall": "npm run build",
+    "heroku-postbuild": "npm install --only=dev --no-shrinkwrap && npm run build",
     "start": "node server.js"
   },
   "dependencies": {
@@ -18,7 +18,8 @@
     "jquery": "^3.4.1",
     "popper.js": "^1.15.0",
     "vue": "^2.6.10",
-    "vue-router": "^3.0.6"
+    "vue-router": "^3.0.6",
+    "webpack": "^4.34.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
