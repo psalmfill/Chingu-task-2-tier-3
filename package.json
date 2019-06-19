@@ -21,8 +21,7 @@
     "vue-router": "^3.0.6",
     "webpack": "^4.34.0",
     "express":"*",
-    "body-parser":"*",
-    "bcrypt": "^0.8.5"
+    "body-parser":"*"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
