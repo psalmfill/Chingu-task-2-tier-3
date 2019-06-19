@@ -50,7 +50,7 @@ export default {
     doSearch:function(){
          //if you want to send any data into server before redirection then you can do it here
          let camara = this.selectedValue ==undefined?'all':this.selectedValue
-        this.$router.push("/search?q="+this.searchInput+"&camara="+camara);
+        this.$router.push("/search?q="+this.searchInput+"&camara="+camera);
       }
   }
 };
