@@ -9,7 +9,7 @@
             <p class="card-text">{{item.data[0].description}}</p> -->
             <table class="table">
                 <tr>
-                    <td>Camara Name</td>
+                    <td>Camera Name</td>
                     <td>{{item.camera.name}}</td>
                 </tr>
                 <tr>

@@ -3,7 +3,7 @@
       <h1 class="heading">Nasa Image Search</h1>
     <form action="" @submit.stop.prevent="submit">
       <div class="input-group"  >
-        <input type="search" class="form-control" v-model="searchInput" id="search-box" >
+        <input type="search" class="form-control" v-model="searchInput" id="search-box" placeholder="Sol">
         <div class="input-group-add-on" id="icon">
           <icon icon="search"/>
         </div>
