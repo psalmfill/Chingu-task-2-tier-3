@@ -1,15 +1,21 @@
 <template>
   <div class="container text-left">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-8">
         <h4 class="text-left text-primary">Nasa Image Search</h4>
         <form @submit.stop.prevent="nextUrl">
-          <input
-            type="search"
-            v-on:keydown.enter="getImages"
-            class="form-control input-block"
-            v-model="searchVaraible"
-          >
+          <div class="input-group">
+            <input
+              type="search"
+              v-on:keydown.enter="getImages"
+              class="form-control input-block"
+              v-model="searchVaraible"
+            >
+            <div class="input-group-add-on" >
+              <button type="submit" class="btn btn-primary btn-block" @click="getImages">Search</button>
+              <!-- <icon icon="search"/> -->
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-12">
               <div class="input-group options">
@@ -46,7 +52,7 @@
       </div>-->
       <div class="row" v-else>
         <div class="col-md-12">
-          <h2>No result was found matching your search : sol {{searchVaraible}} captured by  {{this.camera}}</h2>
+          <h2>No result was found matching your search : sol {{searchVaraible}} captured by {{this.camera}}</h2>
         </div>
       </div>
     </div>
@@ -71,7 +77,7 @@ export default {
     return {
       searchVaraible: this.$route.query.q, //this.searchString != undefined ? this.searchString : "",
       SearchResults: [],
-      page: this.$route.query.page == "" ? 1 : this.$route.query.page,
+      page: this.$route.query.page == undefined ? 1 : this.$route.query.page,
       loading: true,
       camera: this.$route.query.camera,
       item: {},
@@ -90,8 +96,6 @@ export default {
   },
   watch: {
     SearchResults() {
-      if (this.searchVaraible != "" && this.searchVaraible != undefined) {
-      }
       this.$forceUpdate();
       return this.SearchResults;
     },
@@ -99,15 +103,8 @@ export default {
       this.page = 1;
       return this.searchVaraible;
     },
-    //   searchString(){
-    //       console.log(this.$route.query.q)
-    //       if(this.$route.query.q !=undefined){
-    //           getImages()
-    //       }
-    //       return this.$route.query.q
-    //   }
     page() {
-      return this.$route.query.page; //!='' || this.$route.query.page !=undefined) ?this.$route.query.page:1
+      return this.$route.query.page;
     }
   },
   created() {
@@ -122,14 +119,10 @@ export default {
         camera: this.camera.toLowerCase()
       });
       this.SearchResults = response.data;
-      console.log(response);
       this.loading = false;
-      // this.$forceUpdate()
     },
     next() {
-      // if(this.page 1){
       this.page = parseInt(this.page) + 1;
-      // }
       this.nextUrl();
     },
     prev() {
@@ -153,7 +146,6 @@ export default {
       this.item = value;
     },
     changeValue: function(newValue) {
-      console.log(newValue);
       this.camera = newValue;
     }
   },
@@ -164,3 +156,18 @@ export default {
   }
 };
 </script>
+<style scoped>
+#icon {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  border-left: 0px;
+  padding: 0.9% 2%;
+  /* border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px; */
+}
+button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+</style>
+

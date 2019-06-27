@@ -13,7 +13,6 @@ export default {
     computed:{
         radioButtonValue: {
             get: function() {
-                console.log(this.value)
                 return this.value
             },
             set: function() {

@@ -5,14 +5,9 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Search from './components/Search'
 
 export default {
   name: 'app',
-  components: {
-    Search
-  }
 }
 </script>
 

@@ -1,6 +1,8 @@
 <template>
   <div id="search">
-      <h1 class="heading">Nasa Image Search</h1>
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+         <h1 class="heading">Nasa Image Search</h1>
     <form action="" @submit.stop.prevent="submit">
       <div class="input-group"  >
         <input type="search" class="form-control" v-model="searchInput" id="search-box" placeholder="Sol">
@@ -23,6 +25,8 @@
           </div>
       </div>
     </form>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -44,7 +48,6 @@ export default {
   },
   methods: {
     changeValue: function(newValue) {
-      console.log(newValue);
       this.selectedValue = newValue;
     },
     doSearch:function(){
@@ -62,14 +65,7 @@ export default {
     font-weight: bolder;
     margin: 5%
 }
-#search {
-  width: 50%;
-  margin: 0 auto;
-  position: absolute;
-  top: 25%;
-  left: 25%;
-  
-}
+
 #search-box {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;

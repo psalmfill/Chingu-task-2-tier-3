@@ -1,5 +1,5 @@
 <template>
-     <div class="card" style="width:100%;" data-toggle="modal" data-target="#image-detail" @click="showdetail(item)">
+     <div class="card" style="width:100%;" data-toggle="modal" data-target="#image-detail" @click="showdetail()">
           <img class="card-img-top" :src="item.img_src" alt="Card image cap">
           <div class="card-body">
             <!-- <h5 class="card-title">{{item.data[0].title}}</h5>
@@ -10,18 +10,12 @@
 <script>
 export default {
     name:'ImageCard',
-    // props:[
-    //     'imageSrc',
-    //     'description',
-    //     'keyword'
-
-    // ],
     props : {
         item:{
         }
     },
     methods:{
-        showdetail(item){
+        showdetail(){
             this.$emit('showDetail',this.item)
         }
     }
